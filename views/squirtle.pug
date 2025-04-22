@@ -1,0 +1,22 @@
+extend layout
+
+block title
+    link(rel="stylesheet", href="style.css")
+    link(rel="icon", href="Poke Ball Icon.png")
+    title SQUIRTLE | POKÉDEX
+
+block content
+    div#container
+        div.card
+            h5.card-title Squirtle
+            img.card-img(src="Squirtle.png", alt="Squirtle")
+            ul.type-list
+                li.type.water-type water
+        div#info
+            p Dex Number: 7
+            p Category: Tiny Turtle
+            p Height: 1' 8"
+            p Weight: 19.8 lbs
+            p Ability: Torrent
+        div#entry
+            p After birth, its back swells and hardens into a shell. It sprays a potent foam from its mouth.

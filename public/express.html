@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Express intro</title>
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Express intro</h1>
+        <p>The following features are implemented by this server:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>path</th><th>Functionality</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="leftHead"><a href="/hello.html">hello.html</a></td>
+                    <td>A simple implementation of a hello document. There is both a hello.html in the static folder of Express, but there is also a path definied in the app. Whichever is called first will handle this request.</td>
+                </tr>
+                <tr>
+                    <td class="leftHead"><a href="/dog.jpg">dog.jpg</a></td>
+                    <td>Simply showcasing express as a file server.</td>
+                </tr>
+                <tr>
+                    <td class="leftHead"><a href="/hellodog.html">hellodog.html</a></td>
+                    <td>A demonstration that you can just use relative paths for resources in the public folder.</td>
+                </tr>
+                <tr>
+                    <td class="leftHead"><a href="/heyho">heyho</a></td>
+                    <td>A route demonstration. Consider this a "Hello World" of routes.</td>
+                </tr>
+                <tr>
+                    <td class="leftHead"><a href="/params?monkey=me&audience=you">params?monkey=me&audience=you</a></td>
+                    <td>Showcasing express' ability to automatically parse the parameters. This simple route just iterates over all of the parameters, and lists them in an unordered list.</td>
+                </tr>
+                <tr>
+                    <td class="leftHead"><a href="/params">params</a></td>
+                    <td>Same path called without any actual parameters.</td>
+                </tr>
+                <tr>
+                    <td class="leftHead"><a href="/postDemo.html">postDemo.html</a></td>
+                    <td>Demonstration of handling post information. postDemo.html is the page with the webform. It is then passed on to /postDemo, which is a route that processes the data.</td>
+                </tr>
+                <tr>
+                    <td class="leftHead"><a href="/postDemo">postDemo</a></td>
+                    <td>Calling postDemo (the route to process the form data) directly will result in an error explaining it cannot be GET.</td>
+                </tr>
+                <tr>
+                    <td class="leftHead"><a href="/people/Elon%20Musk">people/Elon Musk</a></td>
+                    <td>Demonstration of the path marameters. The people path will only match if a parameter is given to it.</td>
+                </tr>
+                <tr>
+                    <td class="leftHead"><a href="/people">people</a></td>
+                    <td>Calling people without a parameter will result in a 404 error as no routes match.</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </body>
+</html>

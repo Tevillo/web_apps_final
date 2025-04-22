@@ -1,0 +1,28 @@
+extend layout
+
+block title
+    link(rel="stylesheet", href="style.css")
+    script(src="script.js", defer)
+    link(rel="icon", href="Poke Ball Icon.png")
+    title TRAINER | POKÉDEX
+
+block content
+    div#container
+        h1 Hi, #{trainerName}! Welcome to the world of Pokémon!
+        div.card#trainer-pic
+            h5.card-title #{trainerName}
+            img.card-img(src="Pokemon Trainers.png", alt="Trainer")
+        h1 Design Your Emblem!
+            canvas#artField(height="300", width="800")
+            p
+                fieldset
+                    legend Brush Parameters:
+
+                    label(for="color") COLOR:
+                    input#color(type="color", name="color", value="red")
+                    br
+                    label(for="size") SIZE:
+                    input#size(type="range", name="size", min="5", max="100", value="20")
+                    br
+                    button#clearButton(type="button")
+                        | CLEAR CANVAS

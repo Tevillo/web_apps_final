@@ -1,0 +1,314 @@
+@font-face {
+    font-family: pokemonFont;
+    src: url(Pokemon\ Solid.ttf);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+body {
+    background-color:#edeaea;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color:#e4000f;
+}
+
+#header {
+    background-color: #e4000f;
+    color: white;
+    text-align: center;
+    font-size: 10px;
+    font-family: pokemonFont;
+    overflow: hidden;
+}
+
+#header text {
+    fill: #edeaea;
+}
+
+#title {
+    font-size: 25px;
+}
+
+#tagline {
+    letter-spacing: 1px;
+}
+
+#header img {
+    width: 500px;
+    margin-top: -200px;
+    filter: drop-shadow(0px -300px 0 #edeaea);
+    transform: translateY(310px);
+}
+
+path {
+    fill: transparent;
+}
+
+#container {
+    display: grid;
+    background-color: #edeaea;
+    grid-template-columns: auto auto auto;
+    gap: 5px 20px;
+    margin-left: auto;  
+    margin-right: auto;
+}
+
+#container img {
+    width: 200px;    
+}
+
+#container a {
+    text-decoration: none;
+}
+
+#container h1 {
+    margin: 50px;
+}
+
+#trainer-pic {
+    max-height: 400px;
+}
+
+.card {
+    cursor: pointer;
+    background: #edeaea;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    border: 6px solid #e4000f;
+    border-radius: 10px;
+    transition: all 0.1s linear;
+}
+
+.card:hover {
+    box-shadow: 8px 8px #e4000f;
+    border-style: outset;
+}
+
+.card-title {
+    margin: 0px 0px 15px;
+    text-align: center;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #e4000f;
+}
+
+.card-text {
+    font-size: 10px;
+    text-align: center;
+}
+
+.card-img {
+    padding-bottom: 5px;
+}
+
+.type-list {
+    list-style-type: none;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    word-wrap: normal;
+}
+  
+.type {
+    display: inline;
+    margin: 0px 2px;
+    padding: 0px 4px 2px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+
+.fire-type {
+    background-color: #f42;
+}
+  
+.water-type {
+    background-color: #39f;
+}
+  
+.grass-type {
+    background-color: #7c5;
+}
+
+.poison-type {
+    background-color: #a59;
+}
+
+#info, #entry {
+    border: 6px solid #e4000f;
+    margin: 20px;
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 4px;
+}
+
+#info {
+    margin-right: -15px;
+}
+
+#entry {
+    margin-left: -15px;
+}
+
+#form {
+    margin: 0px 0px 40px;
+    text-align: center;
+}
+
+#form p {
+    margin: 0px 0px 20px;
+}
+
+#form label {
+    margin-right: 10px;
+}
+
+#navbar {
+    display: inline-flex;
+}
+
+#home {
+    border: none;
+    background-color: #e4000f;
+    color: #edeaea;
+    float: left;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 50px;
+    width: 120.5px;
+    height: 40px;
+    border-radius: 4px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+}
+
+#home:hover {
+    background-color: #edeaea;
+    color: #e4000f;
+}
+
+canvas,fieldset {
+    background-color: #edeaea;
+    border: 3px dashed #e4000f;
+    border-radius: 10px;
+}
+
+canvas {
+    padding: 2px;
+}
+
+fieldset {
+    display: inline-block;
+    padding: 10px;
+    width: auto;
+}
+
+input[type=color] {
+    background: #edeaea;
+    border: 3px solid #e4000f;
+    border-radius: 4px;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+input[type=color]:hover {
+    transition: all 0.1s linear;
+    box-shadow: 2px 2px #e4000f;
+}
+
+input[type=color]:active {
+    transition: all 0s linear;
+    box-shadow: 2px 2px inset #e4000f;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #edeaea;
+    border: 3px solid #e4000f;
+    border-radius: 4px;
+    height: 4px;
+    margin: 10px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e4000f;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; 
+    cursor: pointer;
+    border: none;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+    background-color: #edeaea;
+    border: 3px solid #e4000f;
+    transition: all 0s linear;
+}
+
+input[type=range]::-webkit-slider-thumb:active {
+    border: 3px solid #edeaea;
+    background: #e4000f;
+    transition: all 0s linear;
+}
+
+input[type=text] {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+    padding: 10px;
+    color: #e4000f;
+    border: 3px solid #edeaea;
+    border-radius: 4px;
+    outline: none;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+input[type=text]:focus {
+    border: 3px solid #e4000f;
+    outline: none;
+}
+
+button, input[type=submit] {
+    border: none;
+    background-color: #e4000f;
+    color: #edeaea;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+}
+
+button:hover, input[type=submit]:hover {
+    box-shadow: 4px 4px #e4000f;
+    transition: all 0.1s linear;
+    background-color: #edeaea;
+    color: #e4000f;
+}
+
+button:active, input[type=submit]:active {
+    background-color: lightgrey;
+    transition: all 0s linear;
+    box-shadow: 2px 2px inset;
+    background-color: #edeaea;
+    color: #e4000f;
+    border: 3px solid #e4000f;
+}

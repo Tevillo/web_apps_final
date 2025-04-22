@@ -1,0 +1,21 @@
+doctype
+html
+    block title
+        link(rel="stylesheet", href="style.css")
+        script(src="script.js", defer)
+        link(rel="icon", href="Poke Ball Icon.png")
+        title POKÉMON | POKÉDEX
+
+    div#header
+        div#navbar
+            a(href="/")
+                button#home HOME
+            img(src="White Half Poké Ball Symbol.png")
+
+    block content
+        div#container
+            div.card
+                h5.card-title Pokémon
+                img.card-img(src="Pikachu.png", alt="Pokémon")
+                ul.type-list
+                    li.type.fire-type fire

@@ -1,0 +1,22 @@
+extend layout
+
+block title
+    link(rel="stylesheet", href="style.css")
+    link(rel="icon", href="Poke Ball Icon.png")
+    title CHARMANDER | POKÉDEX
+
+block content
+    div#container
+        div.card
+            h5.card-title Charmander
+            img.card-img(src="Charmander.png", alt="Charmander")
+            ul.type-list
+                li.type.fire-type fire
+        div#info
+            p Dex Number: 4
+            p Category: Lizard
+            p Height: 2' 0"
+            p Weight: 18.7 lbs
+            p Ability: Blaze
+        div#entry
+            p The flame on its tail shows the strength of its life-force. If Charmander is weak, the flame also burns weakly.
