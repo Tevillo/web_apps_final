@@ -2,6 +2,7 @@
 
 ## Change Log:
 - 4/8 Create README. Objectives Accomplished (0/13)
+- 4/22 Import previous (1/13)
 
 ## ToDo List:
 ### Database
@@ -16,7 +17,7 @@
 - [ ] Sort Button
       
 ### Layout and HTML
-- [ ] Import Existing code
+- [x] Import Existing code
 - [ ] Universal CSS
 - [ ] AJAX
 - [ ] User Creation Page
