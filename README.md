@@ -2,6 +2,7 @@
 
 ## Change Log:
 - 4/8 Create README. Objectives Accomplished (0/13)
+- 4/22 add stuff
 
 ## ToDo List:
 ### Database
