@@ -2,26 +2,30 @@
 
 ## Change Log:
 - 4/8 Create README. Objectives Accomplished (0/13)
-- 4/22 add stuff
+- 4/22 Import previous (1/13)
+- 4/24 Inital Database setup + starting filters (7/17)
 
 ## ToDo List:
 ### Database
-- [ ] Create a Database
-- [ ] Import pokemon into database
-- [ ] Create a pokemon table
-- [ ] Create a User table
-- [ ] Create a team table
+- [x] Create a Database
+- [x] Import pokemon into database
+- [x] Create a pokemon collection
+- [ ] Create a User collection
+- [ ] Create a team collection
+- [ ] Add description to pokemon (4/24)
+- [ ] Update For more pokemon (4/24)
+- [ ] Find missing pokemon (4/24)
 
 ### JS
 - [ ] Search and Filter Function
-- [ ] Sort Button
+- [x] Sort Button
       
 ### Layout and HTML
-- [ ] Import Existing code
+- [x] Import Existing code
 - [ ] Universal CSS
-- [ ] AJAX
+- [x] AJAX
 - [ ] User Creation Page
-- [ ] Pokedex Page
+- [x] Pokedex Page
 - [ ] Create .pug template for single pokedex entry
 
 ## Ideas List

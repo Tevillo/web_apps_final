@@ -1,7 +1,8 @@
 doctype
 html
     link(rel="stylesheet", href="style.css")
-    link(rel="icon", href="Poke Ball Icon.png")
+    script(src="javascripts/filter_sort.js", defer)
+    link(rel="icon", href="images/Poke Ball Icon.png")
     title POKÉDEX
 
     div#header
@@ -14,28 +15,8 @@ html
             text#tagline
                 textPath(xlink:href="#curve2", startOffset="50%", text-anchor="middle")
                     | "Gotta catch 'em all!"
-        img(src="White Half Poké Ball Symbol.png")
+        img(src="images/White Half Poké Ball Symbol.png")
 
-    div#container
-        a(href="bulbasaur.html")
-            div.card
-                h5.card-title Bulbasaur
-                img.card-img(src="Bulbasaur.png", alt="Bulbasaur")
-                ul.type-list
-                    li.type.grass-type grass
-                    li.type.poison-type poison
-        a(href="charmander.html")
-            div.card
-                h5.card-title Charmander
-                img.card-img(src="Charmander.png", alt="Charmander")
-                ul.type-list
-                    li.type.fire-type fire
-        a(href="squirtle.html")
-            div.card
-                h5.card-title Squirtle
-                img.card-img(src="Squirtle.png", alt="Squirtle")
-                ul.type-list
-                    li.type.water-type water
     div#form
         h1 Be a Trainer!
         form(method="post", action=`/trainer`)
@@ -43,3 +24,17 @@ html
                 label Name
                 input(type="text", name="name")
             input(type="submit", value="Submit")
+
+    div#sideButtons
+        select#sortBy(name="sortBy")
+            option(value="pid") Sort: Dex Number
+            option(value="Name") Sort: Name
+            option(value="Type_1") Sort: Type
+            option(value="Height") Sort: Height
+            option(value="Weight") Sort: Weight
+        
+        select#order(name="order")
+            option(value="1") Ascending
+            option(value="-1") Descending
+
+    div#container
