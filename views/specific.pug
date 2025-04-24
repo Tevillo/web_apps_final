@@ -1,0 +1,67 @@
+extend layout
+
+block title
+    link(rel="stylesheet", href="style.css")
+    link(rel="icon", href="images/Poke Ball Icon.png")
+    title ${data.name} | POKÉDEX
+
+block content
+    div#container
+        div.card
+            h5.card-title #{data.name}
+            img.card-img(src=`images/Pokemon Images DB/${data.Name}/${data.Name}_new.png`, alt=data.Name)
+            ul.type-list
+                case data.Type_1 
+                    when "Fire"
+                        li.type.fire-type fire
+                    when "Water"
+                        li.type.water-type water
+                    when "Grass"
+                        li.type.grass-type grass
+                    when "Poison"
+                        li.type.poison-type poison
+                    when "Bug"
+                        li.type.bug-type bug
+                    when "Normal"
+                        li.type.normal-type normal
+                    when "Electric"
+                        li.type.electric-type electric
+                    when "Fighting"
+                        li.type.fighting-type fighting
+                    when "Psychic"
+                        li.type.psychic-type psychic
+                    when "Rock"
+                        li.type.rock-type rock
+                    default
+                        li.type #{data.Type_1}
+                                    ul.type-list
+                case data.Type_2 
+                    when "Fire"
+                        li.type.fire-type fire
+                    when "Water"
+                        li.type.water-type water
+                    when "Grass"
+                        li.type.grass-type grass
+                    when "Poison"
+                        li.type.poison-type poison
+                    when "Bug"
+                        li.type.bug-type bug
+                    when "Normal"
+                        li.type.normal-type normal
+                    when "Electric"
+                        li.type.electric-type electric
+                    when "Fighting"
+                        li.type.fighting-type fighting
+                    when "Psychic"
+                        li.type.psychic-type psychic
+                    when "Rock"
+                        li.type.rock-type rock
+                    default
+                        li.type #{data.Type_2}
+        div#info
+            p Dex Number: #{data.pid}
+            p Height: #{data.Height}
+            p Weight: #{data.Weight}
+            p Ability: #{data.Abilities}
+        div#entry
+            p todo: entry
