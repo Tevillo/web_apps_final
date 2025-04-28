@@ -1,5 +1,6 @@
 const { get } = require('ajax');
 var express = require('express');
+var bcrypt = require('bcrypt'); // Add bcrypt for password hashing
 var router = express.Router();
 
 const MongoClient = require("mongodb").MongoClient;
@@ -25,14 +26,103 @@ router.post('/search', async (req, res) => {
   res.render('poke_visual', { data: data});
 });
 
+router.get('/signup', function(req, res, next) {
+  res.render('signup', { title: 'Sign Up', error: null }); // Pass error as null initially
+});
+
+router.post('/signup', async (req, res) => {
+    const { username, password, confirmPassword } = req.body;
+
+    // Check if password and confirm password match
+    if (password !== confirmPassword) {
+    return res.render('signup', { title: 'Sign Up', error: 'Passwords do not match' }); // Pass error message
+    
+    }
+    if(!username.match(ONLYLETTERSPATTERN)){
+    return res.render('signup', { title: 'Social Circles', error: "Only letters in username"});
+    }
+
+    let check = await checkUser(username);
+    if (check.length > 0) {
+        return res.render('signup', { title: 'Sign Up', error: 'Username already taken' }); // Pass error message
+    } else {
+        // Hash the password
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        
+        createUser(username, hashedPassword);
+    }    
+});
+
+router.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  if(!username.match(ONLYLETTERSPATTERN)) {
+    return res.render('login', { title: 'Social Circles', error: "Invalid username or password"});
+  }
+
+  // Query for the user by username
+  let sql = 'SELECT * FROM users WHERE username = ?'; // Use 'username' to find the user
+  db_connection.query(sql, [username], (err, results) => {
+    if (err) throw err;
+
+    // Check if the user exists
+    if (results.length > 0) {
+      const user = results[0];
+
+      // Check if the password matches the stored hashed password
+      bcrypt.compare(password, user.password_hash, (err, match) => {
+        if (err) throw err;
+
+        if (match) {
+          // Password matches, set session user
+          req.session.user = { username: user.username };
+          res.redirect('/game'); // Redirect to the game page after successful login
+        } else {
+          // Password doesn't match, render login with error
+          res.render('login', { title: 'Login', error: 'Invalid username or password' });
+        }
+      });
+    } else {
+      // If user doesn't exist, render login with error
+      res.render('login', { title: 'Login', error: 'Invalid username or password' });
+    }
+  });
+});
+
+async function checkUser(user) {
+    try {
+        await client.connect();
+        const collection = client.db('pokemon').collection('users');
+        const data = await collection.find({username: user}).limit(1).toArray(); // FindOne wont work for some reason
+        return data;
+    } catch (err) {
+        console.error(err);
+    } finally {
+        await client.close();
+    }
+}
+
+async function createUser(user, pass) {
+    try {
+        await client.connect();
+        const collection = client.db('pokemon').collection('pokedex');
+        const obj = {
+            username: user,
+            password: pass
+        }
+        await collection.insertOne(obj); // FindOne wont work for some reason
+    } catch (err) {
+        console.error(err);
+    } finally {
+        await client.close();
+    }
+}
+
 async function getOne(pid_val) {
     try {
         await client.connect();
         const collection = client.db('pokemon').collection('pokedex');
-        const look = {
-            pid: pid_val
-        }
-        console.log("pid val: " + pid_val);
         const data = await collection.find({pid: Number(pid_val)}).limit(1).toArray(); // FindOne wont work for some reason
         return data;
     } catch (err) {
