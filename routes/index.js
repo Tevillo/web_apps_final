@@ -1,3 +1,4 @@
+const { get } = require('ajax');
 var express = require('express');
 var router = express.Router();
 
@@ -18,8 +19,8 @@ router.get("/", function(req, res) {
 router.post('/search', async (req, res) => {
   console.log("ajax request received");  
   console.log(req.body);
-  const { sort, limit, order } = req.body;
-  const data = await getData(sort,Number(limit), Number(order));
+  const { sort, limit, order, search, filter} = req.body;
+  const data = await getData(sort,Number(limit), Number(order), search, Number(filter));
   console.log(data);
   res.render('poke_visual', { data: data});
 });
@@ -41,7 +42,7 @@ async function getOne(pid_val) {
     }
 }
 
-async function getData(sort, limit, order) {
+async function getData(sort, limit, order, search, filter) {
     try {
         await client.connect();
         const collection = client.db('pokemon').collection('pokedex');
@@ -50,17 +51,63 @@ async function getData(sort, limit, order) {
                 _id: 0,
                 pid: 1,
                 Name: 1,
-                Type_1: 1,
-                Type_2: 1,
+                Types: 1,
             }
         }
-        const data = await collection.find({},options).sort({[sort]: order}).limit(limit).toArray();
+        let searchQuery = {};
+        if (search != "" && search != null) {
+            searchQuery.Name = { $regex: search + '.*', $options: 'i' };
+        }
+        if (filter > 0) {
+            let f = [];
+            getTypes(filter).forEach((type) => {
+                console.log(type);
+                f.push({ "Types": type });
+            });
+            searchQuery["$or"] = f;
+        }
+        console.log("search Query: " + searchQuery);
+        const data = await collection.find(searchQuery,options).sort({[sort]: order}).limit(limit).toArray();
+        console.log(data);
         return data;
     } catch (err) {
         console.error(err);
     } finally {
         await client.close();
     }
+}
+
+function getTypes(filter) {
+    let types = {
+        1: "Normal",
+        2: "Fighting",
+        3: "Flying",
+        4: "Poison",
+        5: "Ground",
+        6: "Rock",
+        7: "Bug",
+        8: "Ghost",
+        9: "Steel",
+        10: "Fire",
+        11: "Water",
+        12: "Grass",
+        13: "Electric",
+        14: "Psychic",
+        15: "Ice",
+        16: "Dragon",
+        17: "Dark",
+        18: "Fairy"
+    };
+    let ret = [];
+    let i = 1;
+    while (filter > 0) {
+        if (filter % 2 == 1) {
+            ret.push(types[i]);
+        }
+        filter = Math.floor(filter / 2);
+        i++;
+    }
+    return ret;
 }
 
 module.exports = router;
