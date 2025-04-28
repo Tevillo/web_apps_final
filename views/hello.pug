@@ -42,10 +42,11 @@ html
             option(value="25") Limit: 25
             option(value="50") Limit: 50
             option(value="100") Limit: 100
+            option(value="1300") Limit: all
 
         input#search(type='text', name='search' placeholder='Search by name or type' value='')
 
-        input#popupbutton(type='button' mouseover='popup(this)' value='Filter by Type')
+        input#popupbutton(type='button' value='Filter by Type')
         ul#checkBundle(style='display:none')
             li
                 input(type='checkbox', id='type0')

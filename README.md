@@ -12,9 +12,9 @@
 - [x] Create a pokemon collection
 - [ ] Create a User collection
 - [ ] Create a team collection
-- [ ] Add description to pokemon (4/24)
-- [ ] Update For more pokemon (4/24)
-- [ ] Find missing pokemon (4/24)
+- [x] Add description to pokemon (4/24)
+- [x] Update For more pokemon (4/24)
+- [x] Find missing pokemon (4/24)
 
 ### JS
 - [ ] Search and Filter Function

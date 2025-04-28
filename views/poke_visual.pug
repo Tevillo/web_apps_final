@@ -2,7 +2,7 @@ each d in data
     a(href=`/dex?ID=${d.pid}`)
         div.card
             h5.card-title #{d.Name}
-            img.card-img(src=`images/Pokemon Images DB/${d.Name}/${d.Name}_new.png`, alt=d.Name)
+            img.card-img(src=`images/Pokemon_Images/${d.Name}.png`, alt=d.Name)
             ul.type-list
                 each t in d.Types
                     case t 
