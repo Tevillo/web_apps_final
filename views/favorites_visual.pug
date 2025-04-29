@@ -1,0 +1,31 @@
+each d in data
+    a(onclick=`addToFavorites(${d.pid})`)
+        div.card
+            h5.card-title #{d.Name}
+            img.card-img(src=`images/Pokemon_Images/${d.Name}.png`, alt=d.Name)
+            ul.type-list
+                each t in d.Types
+                    case t 
+                        when "Fire"
+                            li.type.fire-type fire
+                        when "Water"
+                            li.type.water-type water
+                        when "Grass"
+                            li.type.grass-type grass
+                        when "Poison"
+                            li.type.poison-type poison
+                        when "Bug"
+                            li.type.bug-type bug
+                        when "Normal"
+                            li.type.normal-type normal
+                        when "Electric"
+                            li.type.electric-type electric
+                        when "Fighting"
+                            li.type.fighting-type fighting
+                        when "Psychic"
+                            li.type.psychic-type psychic
+                        when "Rock"
+                            li.type.rock-type rock
+                        default
+                            li.type #{t}
+                                        ul.type-list

@@ -1,15 +1,17 @@
 const { get } = require('ajax');
 var express = require('express');
+var jwt = require('jwt-simple');
+var secret = 'SuperSecretKey'; // Replace with your secret key
 var bcrypt = require('bcrypt'); // Add bcrypt for password hashing
 var router = express.Router();
 
 const MongoClient = require("mongodb").MongoClient;
 var url = "mongodb://127.0.0.1:27017/";
 const client = new MongoClient(url);
+const ONLYLETTERSPATTERN = /^[A-Za-z]+$/;
 
 router.get("/dex", async (req,res) => {
     const data = await getOne(req.query.ID);
-    console.log(data);
     res.render("specific", { data: data[0] });
 });
 
@@ -18,16 +20,17 @@ router.get("/", function(req, res) {
 });
 
 router.post('/search', async (req, res) => {
-  console.log("ajax request received");  
-  console.log(req.body);
-  const { sort, limit, order, search, filter} = req.body;
+  const { sort, limit, order, search, filter, fav} = req.body;
   const data = await getData(sort,Number(limit), Number(order), search, Number(filter));
-  console.log(data);
-  res.render('poke_visual', { data: data});
+  if (Number(fav) == 1) {
+    res.render('favorites_visual', { data: data});
+  } else {
+    res.render('poke_visual', { data: data});
+  }
 });
 
 router.get('/signup', function(req, res, next) {
-  res.render('signup', { title: 'Sign Up', error: null }); // Pass error as null initially
+  res.render('signup', { error: null }); // Pass error as null initially
 });
 
 router.post('/signup', async (req, res) => {
@@ -35,60 +38,102 @@ router.post('/signup', async (req, res) => {
 
     // Check if password and confirm password match
     if (password !== confirmPassword) {
-    return res.render('signup', { title: 'Sign Up', error: 'Passwords do not match' }); // Pass error message
+        return res.render('signup', { error: 'Passwords do not match' }); // Pass error message
     
     }
     if(!username.match(ONLYLETTERSPATTERN)){
-    return res.render('signup', { title: 'Social Circles', error: "Only letters in username"});
+        return res.render('signup', { error: "Only letters in username"});
     }
-
+    
     let check = await checkUser(username);
+
     if (check.length > 0) {
-        return res.render('signup', { title: 'Sign Up', error: 'Username already taken' }); // Pass error message
+        return res.render('signup', { error: 'Username already taken' }); // Pass error message
     } else {
         // Hash the password
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
         
         createUser(username, hashedPassword);
+        res.redirect('/login');
     }    
 });
 
-router.post('/login', (req, res) => {
-  const { username, password } = req.body;
-
-  if(!username.match(ONLYLETTERSPATTERN)) {
-    return res.render('login', { title: 'Social Circles', error: "Invalid username or password"});
-  }
-
-  // Query for the user by username
-  let sql = 'SELECT * FROM users WHERE username = ?'; // Use 'username' to find the user
-  db_connection.query(sql, [username], (err, results) => {
-    if (err) throw err;
-
-    // Check if the user exists
-    if (results.length > 0) {
-      const user = results[0];
-
-      // Check if the password matches the stored hashed password
-      bcrypt.compare(password, user.password_hash, (err, match) => {
-        if (err) throw err;
-
-        if (match) {
-          // Password matches, set session user
-          req.session.user = { username: user.username };
-          res.redirect('/game'); // Redirect to the game page after successful login
-        } else {
-          // Password doesn't match, render login with error
-          res.render('login', { title: 'Login', error: 'Invalid username or password' });
-        }
-      });
-    } else {
-      // If user doesn't exist, render login with error
-      res.render('login', { title: 'Login', error: 'Invalid username or password' });
-    }
-  });
+router.get('/login', function(req, res) {
+    res.render('login', { error: null }); // Pass error as null initially
 });
+
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    if(!username.match(ONLYLETTERSPATTERN)){
+        return res.render('signup', { error: "Only letters in username"});
+    }
+
+    let result = await checkUser(username);
+    // Check if the user exists
+
+    if (result.length > 0) {
+        const user = result[0];
+
+        bcrypt.compare(password, user.password, (err, match) => {
+            if (err) throw err;
+
+            if (match) {
+                const token = jwt.encode({username: user}, secret);
+                res.json({ token: token });
+            }
+        });
+    }
+});
+
+router.get("/status", async function(req, res) {
+    if (!req.headers["x-auth"]) {
+        return res.status(401).json({ error: "No token provided" });
+    }
+
+    try {
+        const token = req.headers["x-auth"];
+        
+        const decoded = jwt.decode(token, secret);
+        const user = await checkUser(decoded.username.username);
+
+        if (user.length > 0) {
+            res.json({ status: "ok", user: user[0] });
+        } else {
+            res.status(401).json({ error: "Invalid token" });
+        }
+    } catch (err) {
+        res.status(401).json({ error: "Invalid token" });
+    }
+});
+
+router.get("/trainer", async function(req, res) {
+    res.render("trainer");
+});
+
+router.post("/addToFavorites", async function(req, res) {
+    const { pid, user } = req.body;
+    try {
+        await client.connect();
+        const collection = client.db('pokemon').collection('users');
+        const filter = { username: user };
+        const update = { $push: { favorites: pid } };
+        await collection.updateOne(filter,update); // FindOne wont work for some reason
+    } catch (err) {
+        console.error(err);
+    } finally {
+        await client.close();
+    }
+});
+
+router.post('/favs', async (req, res) => {
+  const { user } = req.body;
+  const favs = await checkUser(user);
+  const val = await getFromPids(favs[0].favorites);
+  res.render('poke_visual', { data: val });
+});
+
 
 async function checkUser(user) {
     try {
@@ -106,10 +151,11 @@ async function checkUser(user) {
 async function createUser(user, pass) {
     try {
         await client.connect();
-        const collection = client.db('pokemon').collection('pokedex');
+        const collection = client.db('pokemon').collection('users');
         const obj = {
             username: user,
-            password: pass
+            password: pass,
+            favorites: []
         }
         await collection.insertOne(obj); // FindOne wont work for some reason
     } catch (err) {
@@ -132,8 +178,7 @@ async function getOne(pid_val) {
     }
 }
 
-async function getData(sort, limit, order, search, filter) {
-    try {
+async function getData(sort, limit, order, search, filter) { try {
         await client.connect();
         const collection = client.db('pokemon').collection('pokedex');
         const options = {
@@ -151,14 +196,11 @@ async function getData(sort, limit, order, search, filter) {
         if (filter > 0) {
             let f = [];
             getTypes(filter).forEach((type) => {
-                console.log(type);
                 f.push({ "Types": type });
             });
             searchQuery["$or"] = f;
         }
-        console.log("search Query: " + searchQuery);
         const data = await collection.find(searchQuery,options).sort({[sort]: order}).limit(limit).toArray();
-        console.log(data);
         return data;
     } catch (err) {
         console.error(err);
@@ -166,6 +208,34 @@ async function getData(sort, limit, order, search, filter) {
         await client.close();
     }
 }
+
+async function getFromPids(pids) {
+    try {
+        await client.connect();
+        const collection = client.db('pokemon').collection('pokedex');
+        const options = {
+            projection: {
+                _id: 0,
+                pid: 1,
+                Name: 1,
+                Types: 1,
+            }
+        }
+        let searchQuery = {};
+        let f = [];
+        pids.forEach((pid) => {
+            f.push({ "pid": Number(pid) });
+        });
+        searchQuery["$or"] = f;
+        const data = await collection.find(searchQuery,options).toArray();
+        return data;
+    } catch (err) {
+        console.error(err);
+    } finally {
+        await client.close();
+    }
+}
+
 
 function getTypes(filter) {
     let types = {
