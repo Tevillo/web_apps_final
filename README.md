@@ -1,5 +1,9 @@
 # web_apps_final  
 
+## Setup Database:  
+Create a database called pokemon with collections users and pokedex  
+import the json in database into pokedex
+
 ## Change Log:
 - 4/8 Create README. Objectives Accomplished (0/13)
 - 4/22 Import previous (1/13)
