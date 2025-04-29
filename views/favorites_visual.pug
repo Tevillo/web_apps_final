@@ -1,17 +1,10 @@
-extend layout
-
-block title
-    link(rel="stylesheet", href="style.css")
-    link(rel="icon", href="images/Poke Ball Icon.png")
-    title ${data.name} | POKÉDEX
-
-block content
-    div#container
+each d in data
+    a(onclick=`addToFavorites(${d.pid})`)
         div.card
-            h5.card-title #{data.name}
-            img.card-img(src=`images/Pokemon_Images/${data.Name}.png`, alt=data.Name)
+            h5.card-title #{d.Name}
+            img.card-img(src=`images/Pokemon_Images/${d.Name}.png`, alt=d.Name)
             ul.type-list
-                each t in data.Types
+                each t in d.Types
                     case t 
                         when "Fire"
                             li.type.fire-type fire
@@ -36,10 +29,3 @@ block content
                         default
                             li.type #{t}
                                         ul.type-list
-        div#info
-            p Dex Number: #{data.pid}
-            p Height: #{data.Height}
-            p Weight: #{data.Weight}
-            p Ability: #{data.Abilities}
-        div#entry
-            p todo: entry

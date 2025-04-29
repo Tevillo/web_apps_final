@@ -1,6 +1,7 @@
 doctype
 html
     link(rel="stylesheet", href="style.css")
+    script(src="javascripts/token.js", defer)
     script(src="javascripts/filter_sort.js", defer)
     link(rel="icon", href="images/Poke Ball Icon.png")
     title POKÉDEX
@@ -18,12 +19,14 @@ html
         img(src="images/White Half Poké Ball Symbol.png")
 
     div#form
-        h1 Be a Trainer!
-        form(method="post", action=`/trainer`)
-            p
-                label Name
-                input(type="text", name="name")
-            input(type="submit", value="Submit")
+        a(href=`/signup`) Sign Up To Be A Trainer  
+        br
+        a(href=`/login`) Log In As A Trainer
+
+    a#trainer(href =`/trainer`) 
+    br
+
+    button(type='button' id='toggleButton') Left Click to add Favorites
 
     div#sideButtons
         select#sortBy(name="sortBy")
@@ -37,4 +40,69 @@ html
             option(value="1") Ascending
             option(value="-1") Descending
 
+        select#limit(name="limit")
+            option(value="10") Limit: 10
+            option(value="25") Limit: 25
+            option(value="50") Limit: 50
+            option(value="100") Limit: 100
+            option(value="1300") Limit: all
+
+        input#search(type='text', name='search' placeholder='Search by name or type' value='')
+
+        input#popupbutton(type='button' value='Filter by Type')
+        ul#checkBundle(style='display:none')
+            li
+                input(type='checkbox', id='type0')
+                | Normal
+            li
+                input(type='checkbox', id='type1')
+                | Fighting
+            li
+                input(type='checkbox', id='type2')
+                | Flying
+            li
+                input(type='checkbox', id='type3')
+                | Poison
+            li
+                input(type='checkbox', id='type4')
+                | Ground
+            li
+                input(type='checkbox', id='type5')
+                | Rock
+            li
+                input(type='checkbox', id='type6')
+                | Bug
+            li 
+                input(type='checkbox', id='type7')
+                | Ghost
+            li
+                input(type='checkbox', id='type8')
+                | Steel 
+            li  
+                input(type='checkbox', id='type9')
+                | Fire
+            li
+                input(type='checkbox', id='type10')
+                | Water
+            li
+                input(type='checkbox', id='type11')
+                | Grass
+            li
+                input(type='checkbox', id='type12')
+                | Electric
+            li
+                input(type='checkbox', id='type13')
+                | Psychic
+            li
+                input(type='checkbox', id='type14')
+                | Ice
+            li
+                input(type='checkbox', id='type15')
+                | Dragon
+            li
+                input(type='checkbox', id='type16')
+                | Dark
+            li
+                input(type='checkbox', id='type17')
+                | Fairy
     div#container

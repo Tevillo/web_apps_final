@@ -3,14 +3,16 @@ extend layout
 block title
     link(rel="stylesheet", href="style.css")
     script(src="javascripts/script.js", defer)
+    script(src="javascripts/trainer.js", defer)
+    script(src="javascripts/token.js", defer)
     link(rel="icon", href="images/Poke Ball Icon.png")
     title TRAINER | POKÉDEX
 
 block content
     div#container
-        h1 Hi, #{trainerName}! Welcome to the world of Pokémon!
+        h1(id="trainerName")
         div.card#trainer-pic
-            h5.card-title #{trainerName}
+            h5.card-title 
             img.card-img(src="images/Pokemon Trainers.png", alt="Trainer")
         h1 Design Your Emblem!
             canvas#artField(height="300", width="800")
@@ -26,3 +28,5 @@ block content
                     br
                     button#clearButton(type="button")
                         | CLEAR CANVAS
+        button(id="logout") Logout
+    div#info
