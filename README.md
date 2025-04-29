@@ -3,7 +3,8 @@
 ## Change Log:
 - 4/8 Create README. Objectives Accomplished (0/13)
 - 4/22 Import previous (1/13)
-- 4/24 Inital Database setup + starting filters (7/17)
+- 4/24 Inital Database setup + starting filters (7/16)
+- 4/27 Added Filters + better database (10/16)
 - 4/28 Authentication and users and teamsish (16/19)
 
 ## ToDo List:
