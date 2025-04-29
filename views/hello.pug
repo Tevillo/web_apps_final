@@ -1,6 +1,7 @@
 doctype
 html
     link(rel="stylesheet", href="style.css")
+    script(src="javascripts/token.js", defer)
     script(src="javascripts/filter_sort.js", defer)
     link(rel="icon", href="images/Poke Ball Icon.png")
     title POKÉDEX
@@ -18,12 +19,14 @@ html
         img(src="images/White Half Poké Ball Symbol.png")
 
     div#form
-        h1 Be a Trainer!
-        form(method="post", action=`/trainer`)
-            p
-                label Name
-                input(type="text", name="name")
-            input(type="submit", value="Submit")
+        a(href=`/signup`) Sign Up To Be A Trainer  
+        br
+        a(href=`/login`) Log In As A Trainer
+
+    a#trainer(href =`/trainer`) 
+    br
+
+    button(type='button' id='toggleButton') Left Click to add Favorites
 
     div#sideButtons
         select#sortBy(name="sortBy")
@@ -102,7 +105,4 @@ html
             li
                 input(type='checkbox', id='type17')
                 | Fairy
-
-        
-
     div#container

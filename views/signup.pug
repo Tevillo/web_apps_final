@@ -1,0 +1,16 @@
+doctype
+html
+    link(rel="stylesheet", href="style.css")
+    link(rel="icon", href="images/Poke Ball Icon.png")
+    title SIGN UP | POKÉDEX
+
+    p #{error}
+    form(method="post", action=`/signup`)
+        p
+            label username
+            input(type="text", name="username") 
+            label password
+            input(type="text", name="password")
+            label confirm password
+            input(type="text", name="confirmPassword")
+        input(type="submit", value="Submit")

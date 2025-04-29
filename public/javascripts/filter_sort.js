@@ -3,11 +3,26 @@ const sb = document.getElementById("sortBy");
 const order = document.getElementById("order");
 const limit = document.getElementById("limit");
 const search = document.getElementById("search");
+const tb = document.getElementById("toggleButton");
+const trainer = document.getElementById("trainer");
 const typeList = [];
-let info = document.getElementById("container");
+const info = document.getElementById("container");
+let favorites = 0;
+let data = null;
 
-function loadHandler(event) {
-    console.log("Load handling...");
+async function loadHandler(event) {
+    const response = await getStatus();
+    if (response.ok) {
+        data = await response.json();
+        document.getElementById("form").style.visibility = 'hidden';
+        tb.style.visibility = 'visible';
+        tb.addEventListener("click", toggleFav );
+        trainer.innerHTML = `Hi, ${data.user.username}! Welcome to The world of Pokemon!`;
+    } else {
+        document.getElementById("form").style.visibility = 'visible';
+        tb.style.visibility = 'hidden';
+        document.getElementById("trainer").innerHTML = "Please log in to continue.";
+    }
     sb.addEventListener("change", reOrder);
     order.addEventListener("change", reOrder);
     limit.addEventListener("change", reOrder);
@@ -28,13 +43,21 @@ function loadHandler(event) {
     reOrder();
 };
 
+function toggleFav() {
+    if (favorites == 1)  {
+        tb.innerHTML = "Left Click to add Favorites";
+        favorites = 0;
+    } else {
+        tb.innerHTML = "Left Click to show dex";
+        favorites = 1;
+    }
+    reOrder();
+}
 
 function reOrder() {
-    event.preventDefault();
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("load", responseReceivedHandler);
 
-    console.log("Reordering...");
     let filter = 0;
     for (let i = 0; i < typeList.length; i++) {
         if (typeList[i].checked) {
@@ -47,12 +70,10 @@ function reOrder() {
     let lim = limit.value;
     let sea = search.value;
 
-    console.log(sea);
-
     xhr.responseType = "";
     xhr.open("POST", "/search");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded" );
-    xhr.send(`sort=${sortBy}&limit=${lim}&order=${ord}&search=${sea}&filter=${filter}`);
+    xhr.send(`sort=${sortBy}&limit=${lim}&order=${ord}&search=${sea}&filter=${filter}&fav=${favorites}`);
 }
 
 //stolen valor
@@ -77,3 +98,12 @@ function popup() {
         popwindow.style.display = "none";
     }
 };
+
+function addToFavorites(pid) {
+    let xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", responseReceivedHandler);
+    xhr.responseType = "";
+    xhr.open("POST", "/addToFavorites");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded" );
+    xhr.send(`pid=${pid}&user=${data.user.username}`);
+}
