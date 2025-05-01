@@ -6,9 +6,20 @@ html
     script(src="javascripts/users.js", defer)
     title LOGIN | POKÉDEX
 
-    p #{error}
-        label username
-        input(type="text", id="username", name="username") 
-        label password
-        input(type="password",id="password" name="password")
-        input(type="submit", id="sub")
+    div#header
+        div#navbar
+            a(href="/")
+                button#home HOME
+            img(src="images/White Half Poké Ball Symbol.png")
+
+    div#account-page
+        h1 LOG IN!
+
+        div.signup
+            p #{error}
+                label USERNAME: 
+                input(type="text", id="username", name="username")
+                br
+                label PASSWORD: 
+                input(type="password",id="password" name="password")
+            input(type="submit", id="sub")

@@ -19,7 +19,7 @@ async function loadHandler(event) {
     sb.addEventListener("change", reOrder);
     order.addEventListener("change", reOrder);
     limit.addEventListener("change", reOrder);
-    document.getElementById("popupbutton").addEventListener("mouseover", popup);
+    document.getElementById("popupbutton").addEventListener("click", popup);
     for (let i = 0; i < 18; i++) {
         typeList.push(document.getElementById("type" + i));
     }
@@ -78,7 +78,7 @@ function responseReceivedHandler() {
 function popup() {
     var popwindow = document.getElementById("checkBundle");
     if (popwindow.style.display === "none") {
-        popwindow.style.display = "block";
+        popwindow.style.display = "flex";
     } else {
         popwindow.style.display = "none";
     }

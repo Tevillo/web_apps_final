@@ -3,6 +3,11 @@
     src: url(Pokemon\ Solid.ttf);
 }
 
+:root {
+    --red: #e4000f;
+    --white: #edeaea;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -73,6 +78,135 @@ path {
     max-height: 400px;
 }
 
+#entry-container {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    background-color: #edeaea;
+    /* gap: 5px 20px; */
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto;
+    grid-template-areas:
+        "nameplate nameplate image image image image image image"
+        "nameplate nameplate image image image image image image"
+        "type type image image image image image image"
+        "dex dex image image image image image image"
+        "dex dex image image image image image image"
+        "dex dex image image image image image image"
+        "dex dex image image image image image image"
+        "dex dex image image image image image image"
+        "stats stats stats stats stats stats stats stats";
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#entry-container img {
+    /* width: 200px; */
+    /* float: right; */
+}
+
+.nameplate {
+    text-transform: uppercase;
+    margin: 20px;
+    /* padding: 20px; */
+    border: 6px solid var(--red);
+    border-radius: 10px;
+    grid-area: nameplate;
+    display: grid;
+    grid-template-columns: 85% 15%;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "name nums"
+        "name nums";
+}
+
+#entry-container #entry-name {
+    border-right: 6px solid #e4000f;
+    /* border-radius: 10px; */
+    padding: 20px;
+    font-weight: bold;
+    font-size: 40px;
+    background-color: var(--red);
+    color: var(--white);
+    /* flex: 8; */
+    text-align: left;
+    /* justify-self: stretch; */
+    grid-area: name;
+}
+
+#entry-container #entry-nums {
+    display: grid;
+    grid-template-rows: auto auto;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    justify-self: stretch;
+    grid-area: nums;
+    /* flex: 2; */
+    /* align-self: flex-end; */
+}
+#entry-id {
+    /* border-bottom: 6px solid #e4000f; */
+    padding: 5px;
+}
+
+#entry-gen {
+    border-top: 3px solid #e4000f;
+    padding: 5px;
+}
+
+#entry-container .type-list {
+    grid-area: type;
+    margin: 0px 10px;
+    align-self: start;
+}
+
+#entry-container .type {
+    display: block;
+    margin: 10px;
+    padding: 40px 20px;
+}
+
+#entry-container #info {
+    grid-area: dex;
+    border: 6px solid #e4000f;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#entry-container .card {
+    grid-area: image;
+    transition: none;
+    cursor: auto;
+}
+
+#entry-container .card:hover {
+    box-shadow: none;
+    border-style: solid;
+}
+
+#entry-container .stats {
+    border: 6px solid #e4000f;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    font-size: 20px;
+    grid-area: stats;
+    display: flex;
+    justify-content: space-around;
+}
+
+#entry-container .stats p {
+    background-color: var(--red);
+    color: var(--white);
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
 .card {
     cursor: pointer;
     background: #edeaea;
@@ -88,6 +222,14 @@ path {
     box-shadow: 8px 8px #e4000f;
     border-style: outset;
 }
+
+/* .card:active {
+    transition: all 0s linear;
+    box-shadow: 2px 2px inset;
+    background-color: #edeaea;
+    color: #e4000f;
+    border: 3px solid #e4000f;
+} */
 
 .card-title {
     margin: 0px 0px 15px;
@@ -125,6 +267,10 @@ path {
     border-radius: 4px;
 }
 
+.normal-type {
+    background-color: #aa9;
+}
+  
 .fire-type {
     background-color: #f42;
 }
@@ -136,21 +282,69 @@ path {
 .grass-type {
     background-color: #7c5;
 }
-
+  
+.electric-type {
+    background-color: #fc3;
+}
+  
+.rock-type {
+    background-color: #ba6;
+}
+  
+.ground-type {
+    background-color: #db5;
+}
+  
+.psychic-type {
+    background-color: #f59;
+}
+  
+.fighting-type {
+    background-color: #b54;
+}
+  
+.ice-type {
+    background-color: #6cf;
+}
+  
 .poison-type {
     background-color: #a59;
 }
+  
+.flying-type {
+    background-color: #89f;
+}
+  
+.bug-type {
+    background-color: #ab2;
+}
+  
+.ghost-type {
+    background-color: #66b;
+}
+  
+.dragon-type {
+    background-color: #76e;
+}
+  
+.dark-type {
+    background-color: #754;
+}
+  
+.steel-type {
+    background-color: #aab;
+}
+  
+.fairy-type {
+    background-color: #e9e;
+}
 
-#info, #entry {
+#entry {
     border: 6px solid #e4000f;
     margin: 20px;
     padding: 20px;
     font-size: 20px;
     border-radius: 4px;
-}
-
-#info {
-    margin-right: -15px;
 }
 
 #entry {
@@ -265,7 +459,7 @@ input[type=range]::-webkit-slider-thumb:active {
     transition: all 0s linear;
 }
 
-input[type=text] {
+input[type=text], input[type=password] {
     font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
     padding: 10px;
     color: #e4000f;
@@ -276,7 +470,7 @@ input[type=text] {
     transition: 0.5s;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, input[type=password]:focus {
     border: 3px solid #e4000f;
     outline: none;
 }
@@ -305,10 +499,76 @@ button:hover, input[type=submit]:hover {
 }
 
 button:active, input[type=submit]:active {
-    background-color: lightgrey;
+    /* background-color: lightgrey; */
     transition: all 0s linear;
     box-shadow: 2px 2px inset;
     background-color: #edeaea;
     color: #e4000f;
     border: 3px solid #e4000f;
+}
+
+.signup {
+    text-align: center;
+    margin: 50px 0px 0px 0px;
+}
+
+#account-page h1 {
+    font-size: 200px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#greeting {
+    /* font-size: 50px; */
+}
+
+#sideButtons select, #sidebuttons input, #popupbutton {
+    border: none;
+    background-color: #e4000f;
+    color: #edeaea;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+}
+
+#sideButtons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 20px;
+    flex-wrap: wrap;
+}
+
+#checkBundle {
+    position: relative;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#checkBundle li{
+    display: inline-block;
+    list-style: none;
+    text-align: center;
+}
+
+.account {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.account #form, #trainer, a {
+    color:#e4000f;
+    font-size: 25px;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    text-decoration: none;
 }
