@@ -1,0 +1,10 @@
+each team in data
+    if team.length > 0
+        div#teamlist
+            each d in team
+                a(href=`/dex?ID=${d.pid}`)
+                    div.card
+                        h5.card-title #{d.Name}
+                        img.card-img(src=`images/Pokemon_Images/${d.Name}.png`, alt=d.Name)
+                        ul.type-list
+                            include ./partials/types.pug
