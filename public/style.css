@@ -422,6 +422,7 @@ canvas,fieldset {
     background-color: var(--white);
     border: 3px dashed var(--red);
     border-radius: 10px;
+    /* display: inline; */
 }
 
 canvas {
