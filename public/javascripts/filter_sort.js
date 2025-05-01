@@ -3,7 +3,7 @@ const sb = document.getElementById("sortBy");
 const order = document.getElementById("order");
 const limit = document.getElementById("limit");
 const search = document.getElementById("search");
-const trainer = document.getElementById("trainer");
+const trainer = document.getElementById("trainerpage");
 const typeList = [];
 const info = document.getElementById("container");
 let teambuilder = false;
@@ -15,6 +15,10 @@ async function loadHandler(event) {
     if (response.ok) {
         data = await response.json();
         document.getElementById("form").style.visibility = 'hidden';
+        trainer.style.visibility = 'visible';
+        trainer.addEventListener("click", function() {window.location.href = "/trainer";});
+    } else {
+        trainer.style.visibility = 'hidden';
     }
     sb.addEventListener("change", reOrder);
     order.addEventListener("change", reOrder);
@@ -90,19 +94,22 @@ function postTeam() {
     xhr.responseType = "";
     xhr.open("POST", "/addToTeam");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded" );
+    console.log("Adding to teams... " + teams);
     xhr.send(`teamname="blank"&pid1=${teams[0]}&pid2=${teams[1]}&pid3=${teams[2]}&pid4=${teams[3]}&pid5=${teams[4]}&pid6=${teams[5]}&user=${data.user.username}`);
     
-    window.location.href = "/trainer";
+    sleep(100).then(() => { window.location.href = "/trainer"; });
 }
 function team() {
     teambuilder = true;
 }
 
 function addToTeams(pid) {
-    console.log("Adding to teams... " + pid);
     teams.push(pid);
     if (teams.length > 5) {
         console.log("Team is full, sending to server...");
         postTeam();
     }
+}
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }

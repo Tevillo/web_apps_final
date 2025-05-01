@@ -118,7 +118,7 @@ router.get("/trainer", async function(req, res) {
 
 router.post("/addToTeam", async function(req, res) {
     const { pid1, pid2, pid3, pid4, pid5, pid6, user, teamName } = req.body;
-    console.log();
+    console.log(req.body);
     try {
         await client.connect();
         const collection = client.db('pokemon').collection('users');
@@ -135,6 +135,8 @@ router.post("/addToTeam", async function(req, res) {
             ]
         };
         const update = { $push: { teams: newTeam } };
+        console.log(filter);
+        console.log(update);
         await collection.updateOne(filter,update);
     } catch (err) {
         console.error(err);
