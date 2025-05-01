@@ -3,11 +3,11 @@ const sb = document.getElementById("sortBy");
 const order = document.getElementById("order");
 const limit = document.getElementById("limit");
 const search = document.getElementById("search");
-const tb = document.getElementById("toggleButton");
-const trainer = document.getElementById("trainer");
+const trainer = document.getElementById("trainerpage");
 const typeList = [];
 const info = document.getElementById("container");
-let favorites = 0;
+let teambuilder = 0;
+let teams = [];
 let data = null;
 
 async function loadHandler(event) {
@@ -15,13 +15,10 @@ async function loadHandler(event) {
     if (response.ok) {
         data = await response.json();
         document.getElementById("form").style.visibility = 'hidden';
-        tb.style.visibility = 'visible';
-        tb.addEventListener("click", toggleFav );
-        trainer.innerHTML = `Hi, ${data.user.username}! Check out your Trainer Page!`;
+        trainer.style.visibility = 'visible';
+        trainer.addEventListener("click", function() {window.location.href = "/trainer";});
     } else {
-        document.getElementById("form").style.visibility = 'visible';
-        tb.style.visibility = 'hidden';
-        document.getElementById("trainer").innerHTML = "Please log in to continue.";
+        trainer.style.visibility = 'hidden';
     }
     sb.addEventListener("change", reOrder);
     order.addEventListener("change", reOrder);
@@ -43,16 +40,6 @@ async function loadHandler(event) {
     reOrder();
 };
 
-function toggleFav() {
-    if (favorites == 1)  {
-        tb.innerHTML = "Left Click to add Favorites";
-        favorites = 0;
-    } else {
-        tb.innerHTML = "Left Click to show dex";
-        favorites = 1;
-    }
-    reOrder();
-}
 
 function reOrder() {
     let xhr = new XMLHttpRequest();
@@ -70,10 +57,12 @@ function reOrder() {
     let lim = limit.value;
     let sea = search.value;
 
-    xhr.responseType = "";
+    xhr.responseType ="";
     xhr.open("POST", "/search");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded" );
-    xhr.send(`sort=${sortBy}&limit=${lim}&order=${ord}&search=${sea}&filter=${filter}&fav=${favorites}`);
+    xhr.send(`sort=${sortBy}&limit=${lim}&order=${ord}&search=${sea}&filter=${filter}&teambuilder=${teambuilder}`);
+
+
 }
 
 //stolen valor
@@ -99,11 +88,28 @@ function popup() {
     }
 };
 
-function addToFavorites(pid) {
+function postTeam() {
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("load", responseReceivedHandler);
     xhr.responseType = "";
-    xhr.open("POST", "/addToFavorites");
+    xhr.open("POST", "/addToTeam");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded" );
-    xhr.send(`pid=${pid}&user=${data.user.username}`);
+    console.log("Adding to teams... " + teams);
+    xhr.send(`teamname="blank"&pid1=${teams[0]}&pid2=${teams[1]}&pid3=${teams[2]}&pid4=${teams[3]}&pid5=${teams[4]}&pid6=${teams[5]}&user=${data.user.username}`);
+    
+    sleep(100).then(() => { window.location.href = "/trainer"; });
+}
+function team() {
+    teambuilder = 1;
+}
+
+function addToTeams(pid) {
+    teams.push(pid);
+    if (teams.length > 5) {
+        console.log("Team is full, sending to server...");
+        postTeam();
+    }
+}
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }

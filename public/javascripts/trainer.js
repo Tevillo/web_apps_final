@@ -2,18 +2,24 @@ window.addEventListener("load", loadHandler);
 let trainer = document.getElementById("trainerName");
 const info = document.getElementById("info");  
 const logout = document.getElementById("logout");
+const teams = document.getElementById("team");
 var data = null; 
 
 async function loadHandler(event) {
     trainer.innerHTML = "Loading...";
     logout.addEventListener("click", logoutHandler);
+    teams.addEventListener("click", teamCreate);
     const response = await getStatus();
     if (response.ok) {
         data = await response.json();
         console.log(data);
-        trainer.innerHTML = `<span id="greeting">Hi, ${data.user.username}!</span> Welcome to the world of Pokémon!`;
+        trainer.innerHTML = `Hi, ${data.user.username}! Welcome to The world of Pokemon!`;
     }
-    addFavorites();
+    addTeam();
+}
+
+function teamCreate() {
+    window.location.href = "/teambuilder";
 }
 
 function logoutHandler(event) {
@@ -22,27 +28,13 @@ function logoutHandler(event) {
     window.location.href = "/";
 }
 
-function addFavorites() {
+function addTeam() {
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("load", responseReceivedHandler);
-    console.log("Adding to favorites...");
+    console.log("Adding teams...");
     
     xhr.responseType = "";
-    xhr.open("POST", "/favs");
+    xhr.open("POST", "/getTeams");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded" );
     xhr.send(`user=${data.user.username}`);
-}
-
-//stolen valor
-function responseReceivedHandler() {
-    //We received something that is healthy
-    if (this.status === 200) {
-        //Creating a new, empty div
-        //Adding the response to this new div
-        info.innerHTML = this.response;
-        //Appending the div to the subInfo tag
-    } else {
-        //Handling an unsuccessful database lookup
-        info.innerHTML = "Favorites will appear here!";
-    }
 }

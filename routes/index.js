@@ -12,18 +12,22 @@ const ONLYLETTERSPATTERN = /^[A-Za-z]+$/;
 
 router.get("/dex", async (req,res) => {
     const data = await getOne(req.query.ID);
-    res.render("specific", { data: data[0] });
+    res.render("specific", { d: data[0] });
 });
 
 router.get("/", function(req, res) {
-    res.render("hello", { title: 'Pokemon'});
+    res.render("hello", { title: 'Pokemon', teambuilder: false});
+});
+
+router.get("/teambuilder", function(req, res) {
+    res.render("hello", { title: 'Pokemon', teambuilder: true});
 });
 
 router.post('/search', async (req, res) => {
-  const { sort, limit, order, search, filter, fav} = req.body;
+  const { sort, limit, order, search, filter, teambuilder} = req.body;
   const data = await getData(sort,Number(limit), Number(order), search, Number(filter));
-  if (Number(fav) == 1) {
-    res.render('favorites_visual', { data: data});
+  if (Number(teambuilder) === 1) {
+    res.render('teams_visual', { data: data});
   } else {
     res.render('poke_visual', { data: data});
   }
@@ -112,14 +116,28 @@ router.get("/trainer", async function(req, res) {
     res.render("trainer");
 });
 
-router.post("/addToFavorites", async function(req, res) {
-    const { pid, user } = req.body;
+router.post("/addToTeam", async function(req, res) {
+    const { pid1, pid2, pid3, pid4, pid5, pid6, user, teamName } = req.body;
+    console.log(req.body);
     try {
         await client.connect();
         const collection = client.db('pokemon').collection('users');
         const filter = { username: user };
-        const update = { $push: { favorites: pid } };
-        await collection.updateOne(filter,update); // FindOne wont work for some reason
+        const newTeam = {
+            teamName: teamName,
+            poke: [
+                Number(pid1),
+                Number(pid2),
+                Number(pid3),
+                Number(pid4),
+                Number(pid5),
+                Number(pid6)
+            ]
+        };
+        const update = { $push: { teams: newTeam } };
+        console.log(filter);
+        console.log(update);
+        await collection.updateOne(filter,update);
     } catch (err) {
         console.error(err);
     } finally {
@@ -127,11 +145,16 @@ router.post("/addToFavorites", async function(req, res) {
     }
 });
 
-router.post('/favs', async (req, res) => {
-  const { user } = req.body;
-  const favs = await checkUser(user);
-  const val = await getFromPids(favs[0].favorites);
-  res.render('poke_visual', { data: val });
+router.post('/getTeams', async (req, res) => {
+    const { user } = req.body;
+    const vals = await checkUser(user);
+    const team = vals[0].teams;
+    const values = [];
+    for (let i = 0; i < team.length; i++) {
+        let val = await getFromPids(team[i].poke);
+        values.push(val);
+    }
+    return res.render('poke_team', { data: values });
 });
 
 
@@ -155,7 +178,7 @@ async function createUser(user, pass) {
         const obj = {
             username: user,
             password: pass,
-            favorites: []
+            teams: [],
         }
         await collection.insertOne(obj); // FindOne wont work for some reason
     } catch (err) {
