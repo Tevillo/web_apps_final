@@ -98,7 +98,6 @@ function postTeam() {
     xhr.responseType = "";
     xhr.open("POST", "/addToTeam");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded" );
-    console.log("Adding to teams... " + teams);
     xhr.send(`teamname="blank"&pid1=${teams[0]}&pid2=${teams[1]}&pid3=${teams[2]}&pid4=${teams[3]}&pid5=${teams[4]}&pid6=${teams[5]}&user=${data.user.username}`);
     
     sleep(100).then(() => { window.location.href = "/trainer"; });

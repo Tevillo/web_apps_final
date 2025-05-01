@@ -26,6 +26,7 @@ router.get("/teambuilder", function(req, res) {
 router.post('/search', async (req, res) => {
   const { sort, limit, order, search, filter, teambuilder} = req.body;
   const data = await getData(sort,Number(limit), Number(order), search, Number(filter));
+  console.log(teambuilder);
   if (Number(teambuilder) === 1) {
     res.render('teams_visual', { data: data});
   } else {
