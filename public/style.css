@@ -16,13 +16,13 @@ html, body {
 }
 
 body {
-    background-color:#edeaea;
+    background-color:var(--white);
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color:#e4000f;
+    color:var(--red);
 }
 
 #header {
-    background-color: #e4000f;
+    background-color: var(--red);
     color: white;
     text-align: center;
     font-size: 10px;
@@ -31,7 +31,7 @@ body {
 }
 
 #header text {
-    fill: #edeaea;
+    fill: var(--white);
 }
 
 #title {
@@ -45,7 +45,7 @@ body {
 #header img {
     width: 500px;
     margin-top: -200px;
-    filter: drop-shadow(0px -300px 0 #edeaea);
+    filter: drop-shadow(0px -300px 0 var(--white));
     transform: translateY(310px);
 }
 
@@ -61,7 +61,7 @@ path {
 
 #container {
     display: grid;
-    background-color: #edeaea;
+    background-color: var(--white);
     grid-template-columns: auto auto auto;
     gap: 5px 20px;
     margin-left: auto;  
@@ -94,7 +94,7 @@ path {
 #entry-container {
     /* display: flex; */
     /* flex-wrap: wrap; */
-    background-color: #edeaea;
+    background-color: var(--white);
     /* gap: 5px 20px; */
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -129,7 +129,7 @@ path {
 }
 
 #entry-container #entry-name {
-    border-right: 6px solid #e4000f;
+    border-right: 6px solid var(--red);
     /* border-radius: 10px; */
     padding: 20px;
     font-weight: bold;
@@ -159,7 +159,7 @@ path {
 }
 
 #entry-gen {
-    border-top: 3px solid #e4000f;
+    border-top: 3px solid var(--red);
     padding: 5px;
 }
 
@@ -177,7 +177,7 @@ path {
 
 #entry-container #info {
     grid-area: dex;
-    border: 6px solid #e4000f;
+    border: 6px solid var(--red);
     border-radius: 10px;
     margin: 20px;
     padding: 20px;
@@ -197,7 +197,7 @@ path {
 }
 
 #entry-container .stats {
-    border: 6px solid #e4000f;
+    border: 6px solid var(--red);
     border-radius: 10px;
     margin: 20px;
     padding: 20px;
@@ -215,19 +215,27 @@ path {
     border-radius: 10px;
 }
 
+.card h5 {
+    background-color: var(--red);
+    color: var(--white);
+    /* margin: 10px; */
+    padding: 10px;
+    /* border-radius: 3px; */
+}
+
 .card {
     cursor: pointer;
-    background: #edeaea;
+    background: var(--white);
     margin: 20px;
-    padding: 20px;
+    /* padding: 20px; */
     text-align: center;
-    border: 6px solid #e4000f;
+    border: 6px solid var(--red);
     border-radius: 10px;
     transition: all 0.1s linear;
 }
 
 .card:hover {
-    box-shadow: 8px 8px #e4000f;
+    box-shadow: 8px 8px var(--red);
     border-style: outset;
 }
 
@@ -244,7 +252,7 @@ path {
     text-align: center;
     font-size: 25px;
     text-transform: uppercase;
-    color: #e4000f;
+    color: var(--red);
 }
 
 .card-text {
@@ -260,7 +268,7 @@ path {
     list-style-type: none;
     text-align: center;
     padding: 0px;
-    margin: 0px;
+    margin: 10px;
     word-wrap: normal;
 }
   
@@ -270,7 +278,7 @@ path {
     padding: 0px 4px 2px;
     font-size: 20px;
     font-weight: bold;
-    color: white;
+    color: var(--white);
     text-transform: uppercase;
     border-radius: 4px;
 }
@@ -348,7 +356,7 @@ path {
 }
 
 #entry {
-    border: 6px solid #e4000f;
+    border: 6px solid var(--red);
     margin: 20px;
     padding: 20px;
     font-size: 20px;
@@ -378,8 +386,8 @@ path {
 
 #home {
     border: none;
-    background-color: #e4000f;
-    color: #edeaea;
+    background-color: var(--red);
+    color: var(--white);
     float: left;
     text-align: center;
     text-decoration: none;
@@ -396,13 +404,13 @@ path {
 }
 
 #home:hover {
-    background-color: #edeaea;
-    color: #e4000f;
+    background-color: var(--white);
+    color: var(--red);
 }
 
 canvas,fieldset {
-    background-color: #edeaea;
-    border: 3px dashed #e4000f;
+    background-color: var(--white);
+    border: 3px dashed var(--red);
     border-radius: 10px;
 }
 
@@ -417,8 +425,8 @@ fieldset {
 }
 
 input[type=color] {
-    background: #edeaea;
-    border: 3px solid #e4000f;
+    background: var(--white);
+    border: 3px solid var(--red);
     border-radius: 4px;
     margin: 10px;
     margin-top: 0px;
@@ -426,19 +434,19 @@ input[type=color] {
 
 input[type=color]:hover {
     transition: all 0.1s linear;
-    box-shadow: 2px 2px #e4000f;
+    box-shadow: 2px 2px var(--red);
 }
 
 input[type=color]:active {
     transition: all 0s linear;
-    box-shadow: 2px 2px inset #e4000f;
+    box-shadow: 2px 2px inset var(--red);
 }
 
 input[type=range] {
     -webkit-appearance: none;
     appearance: none;
-    background: #edeaea;
-    border: 3px solid #e4000f;
+    background: var(--white);
+    border: 3px solid var(--red);
     border-radius: 4px;
     height: 4px;
     margin: 10px;
@@ -447,7 +455,7 @@ input[type=range] {
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    background: #e4000f;
+    background: var(--red);
     width: 15px;
     height: 15px;
     border-radius: 50%; 
@@ -456,22 +464,22 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 input[type=range]::-webkit-slider-thumb:hover {
-    background-color: #edeaea;
-    border: 3px solid #e4000f;
+    background-color: var(--white);
+    border: 3px solid var(--red);
     transition: all 0s linear;
 }
 
 input[type=range]::-webkit-slider-thumb:active {
-    border: 3px solid #edeaea;
-    background: #e4000f;
+    border: 3px solid var(--white);
+    background: var(--red);
     transition: all 0s linear;
 }
 
 input[type=text], input[type=password] {
     font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
     padding: 10px;
-    color: #e4000f;
-    border: 3px solid #edeaea;
+    color: var(--red);
+    border: 3px solid var(--white);
     border-radius: 4px;
     outline: none;
     -webkit-transition: 0.5s;
@@ -479,14 +487,14 @@ input[type=text], input[type=password] {
 }
 
 input[type=text]:focus, input[type=password]:focus {
-    border: 3px solid #e4000f;
+    border: 3px solid var(--red);
     outline: none;
 }
 
 button, input[type=submit] {
     border: none;
-    background-color: #e4000f;
-    color: #edeaea;
+    background-color: var(--red);
+    color: var(--white);
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
@@ -500,19 +508,19 @@ button, input[type=submit] {
 }
 
 button:hover, input[type=submit]:hover {
-    box-shadow: 4px 4px #e4000f;
+    box-shadow: 4px 4px var(--red);
     transition: all 0.1s linear;
-    background-color: #edeaea;
-    color: #e4000f;
+    background-color: var(--white);
+    color: var(--red);
 }
 
 button:active, input[type=submit]:active {
     /* background-color: lightgrey; */
     transition: all 0s linear;
     box-shadow: 2px 2px inset;
-    background-color: #edeaea;
-    color: #e4000f;
-    border: 3px solid #e4000f;
+    background-color: var(--white);
+    color: var(--red);
+    border: 3px solid var(--red);
 }
 
 .signup {
@@ -544,31 +552,22 @@ select, #sidebuttons input, #popupbutton {
       outline: none;
 }
 
-/* select {
-    background-color: var(--red);
-    color: var(--white);
-} */
-
 select:hover, #popupbutton:hover {
     box-shadow: 4px 4px var(--red);
     transition: all 0.1s linear;
     background-color: var(--white);
     color: var(--red);
+    cursor: pointer;
 }
 
 select:active, #popupbutton:active {
     /* background-color: lightgrey; */
     transition: all 0s linear;
     box-shadow: 2px 2px inset;
-    background-color: #edeaea;
-    color: #e4000f;
-    border: 3px solid #e4000f;
+    background-color: var(--white);
+    color: var(--red);
+    border: 3px solid var(--red);
 }
-
-/* option:hover {
-    background-color: var(--red);
-    color: var(--white);
-} */
 
 select {
     -webkit-appearance: none;
@@ -580,7 +579,7 @@ select {
     position: sticky;
     top: 0;
     background-color: var(--white);
-    border-bottom: 3px solid #e4000f;
+    border-bottom: 3px solid var(--red);
 }
 
 #sideButtons {
@@ -645,7 +644,7 @@ select {
 }
 
 .account #form, #trainer, a {
-    color:#e4000f;
+    color:var(--red);
     font-size: 25px;
     margin: 0;
     padding: 0;
