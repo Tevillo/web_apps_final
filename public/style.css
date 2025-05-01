@@ -53,6 +53,12 @@ path {
     fill: transparent;
 }
 
+#teamlist {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 5px 20px;
+}
+
 #container {
     display: grid;
     background-color: #edeaea;
@@ -76,6 +82,13 @@ path {
 
 #trainer-pic {
     max-height: 400px;
+    transition: none;
+    cursor: auto;
+}
+
+#trainer-pic:hover {
+    box-shadow: none;
+    border-style: solid;
 }
 
 #entry-container {
@@ -98,11 +111,6 @@ path {
         "stats stats stats stats stats stats stats stats";
     margin-left: auto;
     margin-right: auto;
-}
-
-#entry-container img {
-    /* width: 200px; */
-    /* float: right; */
 }
 
 .nameplate {
@@ -519,14 +527,10 @@ button:active, input[type=submit]:active {
     padding: 0;
 }
 
-#greeting {
-    /* font-size: 50px; */
-}
-
-#sideButtons select, #sidebuttons input, #popupbutton {
+select, #sidebuttons input, #popupbutton {
     border: none;
-    background-color: #e4000f;
-    color: #edeaea;
+    background-color: var(--red);
+    color: var(--white);
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
@@ -537,13 +541,19 @@ button:active, input[type=submit]:active {
     cursor: pointer;
     font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
       "Lucida Sans", Arial, sans-serif;
+      outline: none;
 }
 
+/* select {
+    background-color: var(--red);
+    color: var(--white);
+} */
+
 select:hover, #popupbutton:hover {
-    box-shadow: 4px 4px #e4000f;
+    box-shadow: 4px 4px var(--red);
     transition: all 0.1s linear;
-    background-color: #edeaea;
-    color: #e4000f;
+    background-color: var(--white);
+    color: var(--red);
 }
 
 select:active, #popupbutton:active {
@@ -555,8 +565,15 @@ select:active, #popupbutton:active {
     border: 3px solid #e4000f;
 }
 
-#trainer {
-    /* position: relative; */
+/* option:hover {
+    background-color: var(--red);
+    color: var(--white);
+} */
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 #sticky {
@@ -572,17 +589,28 @@ select:active, #popupbutton:active {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 10px 20px;
+    margin: 0px 20px;
     flex-wrap: wrap;
     /* background-color: var(--white);
     border-bottom: 3px solid #e4000f; */
 }
 
-#toggleButton {
+#toggleButton, #toggleButton2 {
     position: fixed;
-    bottom: 30px;
     left: 30px;
-    border: 3px solid var(--white);
+    border: 3px solid var(--red);
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 10px;
+    color: var(--red);
+}
+
+#toggleButton {
+    bottom: 120px;
+}
+
+#toggleButton2 {
+    bottom: 60px;
 }
 
 #checkBundle {
@@ -595,6 +623,20 @@ select:active, #popupbutton:active {
     display: inline-block;
     list-style: none;
     text-align: center;
+    padding: 5px;
+}
+
+#checkBundle input[type=checkbox] {
+    border-radius: 100%;
+    border: 2px solid var(--red);
+    width: 10px;
+    height: 10px;
+    background-color: var(--white);
+    -webkit-appearance: none;
+}
+
+#checkBundle input[type=checkbox]:checked {
+    background-color: var(--red);
 }
 
 .account {

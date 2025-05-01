@@ -150,9 +150,12 @@ router.post('/getTeams', async (req, res) => {
     const vals = await checkUser(user);
     const team = vals[0].teams;
     const values = [];
-    for (let i = 0; i < team.length; i++) {
-        let val = await getFromPids(team[i].poke);
-        values.push(val);
+    if(!team==undefined) {
+        for (let i = 0; i < team.length; i++) {
+            let val = await getFromPids(team[i].poke);
+            values.push(val);
+        }
+        console.log("Team!")
     }
     return res.render('poke_team', { data: values });
 });

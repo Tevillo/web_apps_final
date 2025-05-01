@@ -27,14 +27,9 @@ html
                 a(href=`/login`) LOG IN as a Trainer
 
         button(id="trainerpage") Go to Trainer Page
-    br
-
-    if teambuilder
-        h1(type='button' id='toggleButton' onload="team()") Left Click to Add Pokémon to Team
-        button(type='button' id='toggleButton2' onclick="postTeam()") Click to Finalize Team
 
         div#sideButtons
-            input#search(type='text', name='search' placeholder='Search by name or type' value='')
+            input#search(type='text', name='search' placeholder='Search by Name' value='')
             
             select#sortBy(name="sortBy")
                 option(value="pid") Sort: Dex Number
@@ -111,5 +106,7 @@ html
                 li
                     input(type='checkbox', id='type17')
                     | Fairy
-    button(type='button' id='toggleButton') Left Click to Add Favorites
+    if teambuilder
+        button(type='button' id='toggleButton') Left Click to Add Pokémon to Team
+        button(type='button' id='toggleButton2' onclick="postTeam()") Click to Finalize Team
     div#container
