@@ -2,9 +2,9 @@ extend layout
 
 block title
     link(rel="stylesheet", href="style.css")
+    script(src="javascripts/token.js", defer)
     script(src="javascripts/script.js", defer)
     script(src="javascripts/trainer.js", defer)
-    script(src="javascripts/token.js", defer)
     link(rel="icon", href="images/Poke Ball Icon.png")
     title TRAINER | POKÉDEX
 
@@ -29,4 +29,5 @@ block content
                     button#clearButton(type="button")
                         | CLEAR CANVAS
         button(id="logout") Logout
+        button(id="team") Create A Team
     div#info

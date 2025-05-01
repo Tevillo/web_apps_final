@@ -26,3 +26,17 @@ async function login() {
     }
     return false;
 }
+
+//stolen valor
+function responseReceivedHandler() {
+    //We received something that is healthy
+    if (this.status === 200) {
+        //Creating a new, empty div
+        //Adding the response to this new div
+        info.innerHTML = this.response;
+        //Appending the div to the subInfo tag
+    } else {
+        //Handling an unsuccessful database lookup
+        info.innerHTML = "Query error";
+    }
+}
