@@ -18,17 +18,20 @@ html
                     | "Gotta catch 'em all!"
         img(src="images/White Half Poké Ball Symbol.png")
 
-    div#form
-        a(href=`/signup`) Sign Up To Be A Trainer  
-        br
-        a(href=`/login`) Log In As A Trainer
+    div.account
+        div#form
+            a(href=`/signup`) SIGN UP to be a Trainer
+            br
+            a(href=`/login`) LOG IN as a Trainer
 
-    a#trainer(href =`/trainer`) 
+        a#trainer(href =`/trainer`) 
     br
 
-    button(type='button' id='toggleButton') Left Click to add Favorites
+    button(type='button' id='toggleButton') Left Click to Add Favorites
 
     div#sideButtons
+        input#search(type='text', name='search' placeholder='Search by name or type' value='')
+        
         select#sortBy(name="sortBy")
             option(value="pid") Sort: Dex Number
             option(value="Name") Sort: Name
@@ -47,9 +50,8 @@ html
             option(value="100") Limit: 100
             option(value="1300") Limit: all
 
-        input#search(type='text', name='search' placeholder='Search by name or type' value='')
-
         input#popupbutton(type='button' value='Filter by Type')
+        
         ul#checkBundle(style='display:none')
             li
                 input(type='checkbox', id='type0')

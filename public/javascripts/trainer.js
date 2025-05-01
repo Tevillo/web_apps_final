@@ -11,7 +11,7 @@ async function loadHandler(event) {
     if (response.ok) {
         data = await response.json();
         console.log(data);
-        trainer.innerHTML = `Hi, ${data.user.username}! Welcome to The world of Pokemon!`;
+        trainer.innerHTML = `<span id="greeting">Hi, ${data.user.username}!</span> Welcome to the world of Pokémon!`;
     }
     addFavorites();
 }
@@ -43,6 +43,6 @@ function responseReceivedHandler() {
         //Appending the div to the subInfo tag
     } else {
         //Handling an unsuccessful database lookup
-        info.innerHTML = "Query error";
+        info.innerHTML = "Favorites will appear here!";
     }
 }

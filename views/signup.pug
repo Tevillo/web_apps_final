@@ -4,13 +4,24 @@ html
     link(rel="icon", href="images/Poke Ball Icon.png")
     title SIGN UP | POKÉDEX
 
-    p #{error}
-    form(method="post", action=`/signup`)
-        p
-            label username
-            input(type="text", name="username") 
-            label password
-            input(type="text", name="password")
-            label confirm password
-            input(type="text", name="confirmPassword")
-        input(type="submit", value="Submit")
+    div#header
+        div#navbar
+            a(href="/")
+                button#home HOME
+            img(src="images/White Half Poké Ball Symbol.png")
+
+    div#account-page
+        h1 SIGN UP!
+    
+        p #{error}
+        form(method="post", action=`/signup`).signup
+            p
+                label USERNAME: 
+                input(type="text", name="username") 
+                br
+                label PASSWORD: 
+                input(type="password", name="password")
+                br
+                label CONFIRM PASSWORD: 
+                input(type="password", name="confirmPassword")
+            input(type="submit", value="Submit")
