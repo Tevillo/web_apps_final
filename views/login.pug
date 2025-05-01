@@ -1,0 +1,14 @@
+doctype
+html
+    link(rel="stylesheet", href="style.css")
+    link(rel="icon", href="images/Poke Ball Icon.png")
+    script(src="javascripts/token.js", defer)
+    script(src="javascripts/users.js", defer)
+    title LOGIN | POKÉDEX
+
+    p #{error}
+        label username
+        input(type="text", id="username", name="username") 
+        label password
+        input(type="password",id="password" name="password")
+        input(type="submit", id="sub")
