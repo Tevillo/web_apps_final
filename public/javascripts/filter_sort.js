@@ -6,7 +6,7 @@ const search = document.getElementById("search");
 const trainer = document.getElementById("trainerpage");
 const typeList = [];
 const info = document.getElementById("container");
-let teambuilder = false;
+let teambuilder = 0;
 let teams = [];
 let data = null;
 
@@ -57,7 +57,7 @@ function reOrder() {
     let lim = limit.value;
     let sea = search.value;
 
-    xhr.responseType = "";
+    xhr.responseType ="";
     xhr.open("POST", "/search");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded" );
     xhr.send(`sort=${sortBy}&limit=${lim}&order=${ord}&search=${sea}&filter=${filter}&teambuilder=${teambuilder}`);
@@ -100,7 +100,7 @@ function postTeam() {
     sleep(100).then(() => { window.location.href = "/trainer"; });
 }
 function team() {
-    teambuilder = true;
+    teambuilder = 1;
 }
 
 function addToTeams(pid) {
