@@ -12,7 +12,7 @@ const ONLYLETTERSPATTERN = /^[A-Za-z]+$/;
 
 router.get("/dex", async (req,res) => {
     const data = await getOne(req.query.ID);
-    res.render("specific", { data: data[0] });
+    res.render("specific", { d: data[0] });
 });
 
 router.get("/", function(req, res) {
@@ -26,7 +26,7 @@ router.get("/teambuilder", function(req, res) {
 router.post('/search', async (req, res) => {
   const { sort, limit, order, search, filter, teambuilder} = req.body;
   const data = await getData(sort,Number(limit), Number(order), search, Number(filter));
-  if (teambuilder) {
+  if (Number(teambuilder) === 1) {
     res.render('teams_visual', { data: data});
   } else {
     res.render('poke_visual', { data: data});

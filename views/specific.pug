@@ -3,67 +3,27 @@ extend layout
 block title
     link(rel="stylesheet", href="style.css")
     link(rel="icon", href="images/Poke Ball Icon.png")
-    title #{data.Name} | POKÉDEX
+    title #{d.Name} | POKÉDEX
 
 block content
     div#entry-container
         div.nameplate
-            div#entry-name #{data.Name}
+            div#entry-name #{d.Name}
             div#entry-nums
-                div#entry-id ID: #{data.pid}
-                div#entry-gen GEN: #{data.Generation}
+                div#entry-id ID: #{d.pid}
+                div#entry-gen GEN: #{d.Generation}
         ul.type-list
-            each t in data.Types
-                case t 
-                    when "Fire"
-                        li.type.fire-type fire
-                    when "Water"
-                        li.type.water-type water
-                    when "Grass"
-                        li.type.grass-type grass
-                    when "Poison"
-                        li.type.poison-type poison
-                    when "Bug"
-                        li.type.bug-type bug
-                    when "Normal"
-                        li.type.normal-type normal
-                    when "Electric"
-                        li.type.electric-type electric
-                    when "Fighting"
-                        li.type.fighting-type fighting
-                    when "Psychic"
-                        li.type.psychic-type psychic
-                    when "Rock"
-                        li.type.rock-type rock
-                    when "Flying"
-                        li.type.flying-type flying
-                    when "Dark"
-                        li.type.dark-type dark
-                    when "Steel"
-                        li.type.steel-type steel
-                    when "Ground"
-                        li.type.rock-type ground
-                    when "Fairy"
-                        li.type.fairy-type fairy
-                    when "Dragon"
-                        li.type.dragon-type dragon
-                    when "Ice"
-                        li.type.ice-type ice
-                    when "Ghost"
-                        li.type.ghost-type ghost
-                    default
-                        li.type #{t}
-                                    ul.type-list
+            include ./partials/types.pug
         div#info
-            p Height: #{data.Height}
-            p Weight: #{data.Weight}
-            p Abilities: #{data.Abilities}
+            p Height: #{d.Height} Meters
+            p Weight: #{d.Weight} Kg
+            p Abilities: #{d.Abilities}
         div.card
-            img.card-img(src=`images/Pokemon_Images/${data.Name}.png`, alt=data.Name)
+            img.card-img(src=`images/Pokemon_Images/${d.Name}.png`, alt=d.Name)
         div.stats
-            p HP: #{data.HP}
-            p Speed: #{data.Speed}
-            p Attack: #{data.Attack}
-            p Defense: #{data.Defense}
-            p Special Attack: #{data.SpAtk}
-            p Special Defense: #{data.SpDef}
+            p HP: #{d.HP}
+            p Speed: #{d.Speed}
+            p Attack: #{d.Attack}
+            p Defense: #{d.Defense}
+            p Special Attack: #{d.SpAtk}
+            p Special Defense: #{d.SpDef}
