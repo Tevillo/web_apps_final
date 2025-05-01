@@ -17,7 +17,7 @@ async function loadHandler(event) {
         document.getElementById("form").style.visibility = 'hidden';
         tb.style.visibility = 'visible';
         tb.addEventListener("click", toggleFav );
-        trainer.innerHTML = `Hi, ${data.user.username}! Welcome to The world of Pokemon!`;
+        trainer.innerHTML = `Hi, ${data.user.username}! Check out your Trainer Page!`;
     } else {
         document.getElementById("form").style.visibility = 'visible';
         tb.style.visibility = 'hidden';

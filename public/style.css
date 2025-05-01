@@ -539,12 +539,50 @@ button:active, input[type=submit]:active {
       "Lucida Sans", Arial, sans-serif;
 }
 
+select:hover, #popupbutton:hover {
+    box-shadow: 4px 4px #e4000f;
+    transition: all 0.1s linear;
+    background-color: #edeaea;
+    color: #e4000f;
+}
+
+select:active, #popupbutton:active {
+    /* background-color: lightgrey; */
+    transition: all 0s linear;
+    box-shadow: 2px 2px inset;
+    background-color: #edeaea;
+    color: #e4000f;
+    border: 3px solid #e4000f;
+}
+
+#trainer {
+    /* position: relative; */
+}
+
+#sticky {
+    position: sticky;
+    top: 0;
+    background-color: var(--white);
+    border-bottom: 3px solid #e4000f;
+}
+
 #sideButtons {
+    /* position: sticky;
+    top: 0; */
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 10px 20px;
     flex-wrap: wrap;
+    /* background-color: var(--white);
+    border-bottom: 3px solid #e4000f; */
+}
+
+#toggleButton {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    border: 3px solid var(--white);
 }
 
 #checkBundle {
@@ -561,7 +599,7 @@ button:active, input[type=submit]:active {
 
 .account {
     text-align: center;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .account #form, #trainer, a {
